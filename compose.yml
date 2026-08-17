@@ -17,7 +17,6 @@ services:
       - ./entrypoints/entrypoint.sh:/entrypoint.sh:rwx
       - ./commands/:/cmd
       - ./dependencies/:/dep
-      - ./workspace:/app:rw
       - /sys:/sys
       - /etc/udev:/etc/udev
       - /run/udev:/run/udev

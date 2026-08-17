@@ -6,4 +6,4 @@ cd /app
 
 rosdep install --from-paths /app --ignore-src -r -y -q
 
-colcon build --symlink-install --packages-ignore $1
+colcon build --packages-ignore $1

@@ -14,6 +14,8 @@ COPY ./dependencies /dep
 
 COPY ./commands /cmd
 
+COPY ./debs /debs
+
 RUN --mount=type=cache,target=/var/cache/apt apt update -y
 
 RUN --mount=type=cache,target=/var/cache/apt apt install gettext -y
@@ -73,7 +75,7 @@ RUN dpkg -i gasket-dkms_1.0-18_all.deb
 
 RUN ldconfig
 
-RUN chmod -R a+x /app/cmd
+RUN chmod -R a+x /cmd
 
 WORKDIR /
 
@@ -102,6 +104,12 @@ RUN echo 'export PATH="$PATH:/cmd"' >> /root/.bashrc
 COPY ./entrypoints/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
+
+COPY ./workspace/ /app
+
+WORKDIR /app
+
+RUN /cmd/build_packages.sh
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
