@@ -1,8 +1,8 @@
 services:
   gazebo:
-    container_name: kapibara_one_dev
+    container_name: kapibara_one_hal
     network_mode: host
-    image: kapibara_one_dev
+    image: kapibara_one_hal
 
     privileged: true
     tty: true
