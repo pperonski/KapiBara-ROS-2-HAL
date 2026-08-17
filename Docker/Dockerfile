@@ -2,7 +2,6 @@ FROM althack/ros2:humble-base
 
 # SHELL ["/bin/bash", "-c"]
 
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV BUILD_LOCATION=./build
@@ -84,9 +83,23 @@ RUN mkdir -p /app
 
 RUN apt install -y tini
 
+# Install uv backend
+RUN pip install uv
+RUN apt install binfmt-support -y
+
+COPY utils/py-extension /usr/share/binfmts/py-extension
+
+COPY utils/uv-runner /bin/uv-runner
+RUN chmod +x /bin/uv-runner
+RUN update-binfmts --import py-extension
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
+
+RUN echo 'export PATH="$PATH:/cmd"' >> /root/.bashrc
+
 # Copy entrypoint
 
-COPY ./entrypoints/entrypoint.prod.sh /entrypoint.sh
+COPY ./entrypoints/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
