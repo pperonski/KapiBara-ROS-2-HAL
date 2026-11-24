@@ -1,59 +1,36 @@
 # KapiBara ROS2 container
 
-Container with ROS 2 and all required hardware drivers. 
+Container with ROS 2 and all required hardware drivers.
 
-## Development containter
+## Quickstart
 
-To run dev container execute:
+To run container execute:
 
 ```bash
-./dev.sh start
+./run.sh start
 ```
 
 Container should start then in seperate terminal you can execute any ros command using:
 
 ```bash
-./dev.sh cmd \<command\>
+./run.sh cmd \<command\>
 ```
 
-## Production containter
+## Build container
 
-First build containter execute:
+In order to build container run:
 
 ``` bash
-./prod.sh build
+./run.sh build
 ```
 
-Then execute:
+In order to build container without cache run:
 
 ``` bash
-./prod.sh start_bg
-```
-## Helper commands
-
-There is a bunch of helper scripts prepared you can acess them by typing:
-
-``` bash
-./(prod.sh | dev.sh) cmd /cmd/\<command name\>
+./run.sh rebuild
 ```
 
-Commands are in commands folder with descriptions.
+## Other containers
 
-## Dependencies
-
-In folder dependencies there is a file called packages.txt which holds 
-linux packages required for container to run.
-
-## Environment variables
-
-env folder holds two files **dev** and **prod**. **dev** file holds envrionment variables
-for development container and **prod** holds variables for production container.
-
-## Workspace 
-
-It is a workspace folder in which every ROS 2 packages go.
-
-TODO:
-
-- execute simulation, create a proper config file
-- move ros2 mujoco control node to seperate container for portability
+- Container with main logic - <https://github.com/pperonski/KapiBara-ROS-2-General-Image>
+- Container with Mojoco simulation - <https://github.com/pperonski/KapiBara-ROS-2-Mujoco>
